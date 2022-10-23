@@ -24,7 +24,9 @@ var (
 func Connect() {
 	var err error
 
-	var dsn string = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
+	// dsn := "host=localhost user=gorm password=gorm dbname=gorm port=9920 sslmode=disable TimeZone=Asia/Shanghai"
+
+	var dsn string = fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=Asia/Shanghai",
 		DB_HOST,
 		DB_PORT,
 		DB_USERNAME,
