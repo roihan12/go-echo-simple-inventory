@@ -28,10 +28,10 @@ func Connect() {
 
 	var dsn string = fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=Asia/Shanghai",
 		DB_HOST,
-		DB_PORT,
 		DB_USERNAME,
 		DB_PASSWORD,
 		DB_NAME,
+		DB_PORT,
 		DB_SSLMODE,
 	)
 
