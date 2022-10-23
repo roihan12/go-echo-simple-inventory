@@ -2,36 +2,36 @@ package database
 
 import (
 	"echo-item/model"
-	"echo-item/util"
 	"fmt"
 	"log"
+	"os"
 
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 var DB *gorm.DB
 
 var (
-	DB_USERNAME string = util.GetConfig("DB_USERNAME")
-	DB_PASSWORD string = util.GetConfig("DB_PASSWORD")
-	DB_NAME     string = util.GetConfig("DB_NAME")
-	DB_HOST     string = util.GetConfig("DB_HOST")
-	DB_PORT     string = util.GetConfig("DB_PORT")
+	DB_USERNAME string = os.Getenv("DB_USERNAME") //util.GetConfig("DB_USERNAME")
+	DB_PASSWORD string = os.Getenv("DB_PASSWORD") //util.GetConfig("DB_PASSWORD")
+	DB_NAME     string = os.Getenv("DB_NAME")     //util.GetConfig("DB_NAME")
+	DB_HOST     string = os.Getenv("DB_HOST")     //util.GetConfig("DB_HOST")
+	DB_PORT     string = os.Getenv("DB_PORT")     //util.GetConfig("DB_PORT")
 )
 
 func Connect() {
 	var err error
 
-	var dsn string = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-		DB_USERNAME,
-		DB_PASSWORD,
+	var dsn string = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s",
 		DB_HOST,
 		DB_PORT,
+		DB_USERNAME,
+		DB_PASSWORD,
 		DB_NAME,
 	)
 
-	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		log.Fatalf("error when connecting to the database: %s", err)
