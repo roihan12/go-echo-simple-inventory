@@ -18,17 +18,19 @@ var (
 	DB_NAME     string = os.Getenv("DB_NAME")     //util.GetConfig("DB_NAME")
 	DB_HOST     string = os.Getenv("DB_HOST")     //util.GetConfig("DB_HOST")
 	DB_PORT     string = os.Getenv("DB_PORT")     //util.GetConfig("DB_PORT")
+	DB_SSLMODE  string = os.Getenv("DB_SSLMODE")  //util.GetConfig("DB_PORT")
 )
 
 func Connect() {
 	var err error
 
-	var dsn string = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s",
+	var dsn string = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
 		DB_HOST,
 		DB_PORT,
 		DB_USERNAME,
 		DB_PASSWORD,
 		DB_NAME,
+		DB_SSLMODE,
 	)
 
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
